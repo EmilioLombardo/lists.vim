@@ -211,6 +211,12 @@ function! lists#move(direction, ...) abort "{{{1
   silent execute printf('%d,%dm %d',
         \ l:current.lnum_start, l:current.lnum_last, l:target)
 
+  if a:direction == 0
+    silent! call repeat#set("\<Plug>(lists-moveup)", v:count)
+  elseif a:direction == 1
+    silent! call repeat#set("\<Plug>(lists-movedown)", v:count)
+  endif
+
   call setpos('.', l:target_pos)
 endfunction
 
